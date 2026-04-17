@@ -33,16 +33,61 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
           else if(state is AmbienceLoaded){
-            return ListView.builder(
-              itemCount: state.ambiences.length,
-              itemBuilder: (context,index){
-                final item=state.ambiences[index];
-                return ListTile(
-                  leading: Image.asset(item.image, width: 50,),
-                  title: Text(item.title),
-                  subtitle: Text("${item.tag} • ${item.duration}s"),
-                );
-              },
+            return Expanded(
+              child: GridView.builder(
+                padding: const EdgeInsets.all(16),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.8,
+                ),
+                itemCount: state.ambiences.length,
+                itemBuilder: (context,index){
+                  final item=state.ambiences[index];
+
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: AssetImage(item.image),
+                        fit: BoxFit.cover,
+                      )
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                            colors: [
+                              Colors.black.withOpacity(0.1),
+                              Colors.black.withOpacity(0.6),
+                            ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "${item.tag} • ${item.duration}s",
+                            style: const TextStyle(color: Colors.white70),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             );
           }
           else if(state is AmbienceError){
