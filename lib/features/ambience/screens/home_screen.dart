@@ -18,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     context.read<AmbienceBloc>().add(LoadAmbience());
   }
+  String searchQuery = "";
+  String selectedTag = "All";
   
   @override
   Widget build(BuildContext context) {
@@ -33,61 +35,128 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
           else if(state is AmbienceLoaded){
-            return Expanded(
-              child: GridView.builder(
-                padding: const EdgeInsets.all(16),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 0.8,
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value.toLowerCase();
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Search ambiences...",
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
                 ),
-                itemCount: state.ambiences.length,
-                itemBuilder: (context,index){
-                  final item=state.ambiences[index];
 
-                  return Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: DecorationImage(
-                        image: AssetImage(item.image),
-                        fit: BoxFit.cover,
-                      )
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        gradient: LinearGradient(
-                            colors: [
-                              Colors.black.withOpacity(0.1),
-                              Colors.black.withOpacity(0.6),
-                            ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: ["All", "Focus", "Calm", "Sleep", "Reset"]
+                        .map((tag) => Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: ChoiceChip(
+                        label: Text(tag),
+                        selected: selectedTag == tag,
+                        onSelected: (_) {
+                          setState(() {
+                            selectedTag = tag;
+                          });
+                        },
+                      ),
+                    ))
+                        .toList(),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                Expanded(
+                  child: Builder(
+                    builder: (context) {
+
+                      final filtered = state.ambiences.where((item) {
+                        final matchesSearch =
+                        item.title.toLowerCase().contains(searchQuery);
+
+                        final matchesTag =
+                            selectedTag == "All" || item.tag == selectedTag;
+
+                        return matchesSearch && matchesTag;
+                      }).toList();
+
+                      if (filtered.isEmpty) {
+                        return const Center(
+                          child: Text("No ambiences found"),
+                        );
+                      }
+
+                      return GridView.builder(
+                        padding: const EdgeInsets.all(16),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 0.8,
                         ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.title,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                        itemCount: filtered.length,
+                        itemBuilder: (context, index) {
+                          final item = filtered[index];
+
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              image: DecorationImage(
+                                image: AssetImage(item.image),
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "${item.tag} • ${item.duration}s",
-                            style: const TextStyle(color: Colors.white70),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.black.withOpacity(0.1),
+                                    Colors.black.withOpacity(0.6),
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.title,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${item.tag} • ${item.duration}s",
+                                    style:
+                                    const TextStyle(color: Colors.white70),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             );
           }
           else if(state is AmbienceError){
