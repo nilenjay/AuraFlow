@@ -8,4 +8,11 @@ abstract class AmbienceEvent extends Equatable{
 
 class LoadAmbience extends AmbienceEvent{}
 
+class FilterAmbiences extends AmbienceEvent{
+  final String query;
+  final String tag;
+
+  FilterAmbiences({required this.query, required this.tag});
+}
+
 

@@ -1,32 +1,39 @@
 import 'package:equatable/equatable.dart';
-
 import '../../../data/models/ambience_model.dart';
 
-abstract class AmbienceState extends Equatable{
+abstract class AmbienceState extends Equatable {
+  const AmbienceState();
 
   @override
   List<Object?> get props => [];
 }
 
-class AmbienceInitial extends AmbienceState{}
-
-class AmbienceLoaded extends AmbienceState{
-  final List<Ambience> ambiences;
-
-  AmbienceLoaded(this.ambiences);
-
-  @override
-  List<Object?> get props => [ambiences];
+class AmbienceInitial extends AmbienceState {
+  const AmbienceInitial();
 }
 
-class AmbienceLoading extends AmbienceState{}
+class AmbienceLoading extends AmbienceState {
+  const AmbienceLoading();
+}
 
-class AmbienceError extends AmbienceState{
+class AmbienceLoaded extends AmbienceState {
+  final List<Ambience> allAmbiences;
+  final List<Ambience> filteredAmbiences;
+
+  const AmbienceLoaded({
+    required this.allAmbiences,
+    required this.filteredAmbiences,
+  });
+
+  @override
+  List<Object?> get props => [allAmbiences, filteredAmbiences];
+}
+
+class AmbienceError extends AmbienceState {
   final String message;
 
-  AmbienceError(this.message);
+  const AmbienceError(this.message);
 
   @override
   List<Object?> get props => [message];
 }
-
