@@ -1,6 +1,9 @@
 import 'package:auraflow/features/ambience/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../data/models/ambience_model.dart';
+import '../features/ambience/screens/ambience_details_screen.dart';
+
 class AppRouter {
   static final router = GoRouter(
     initialLocation: '/',
@@ -10,6 +13,14 @@ class AppRouter {
         name: 'home',
         builder: (context,state)=> const HomeScreen(),
       ),
+      GoRoute(
+        path: '/detail',
+        name: 'detail',
+        builder: (context,state){
+          final item=state.extra as Ambience;
+          return AmbienceDetailScreen(item: item);
+        }
+      )
     ]
   );
 }
