@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../data/models/ambience_model.dart';
 import '../features/ambience/screens/ambience_details_screen.dart';
+import '../features/ambience/screens/player_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(

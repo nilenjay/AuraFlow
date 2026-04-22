@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../data/models/ambience_model.dart';
+import 'dart:async';
 
 class PlayerScreen extends StatefulWidget {
   final Ambience item;
@@ -10,9 +11,20 @@ class PlayerScreen extends StatefulWidget {
   State<PlayerScreen> createState() => _PlayerScreenState();
 }
 
+
 class _PlayerScreenState extends State<PlayerScreen> {
   bool isPlaying = false;
   double progress = 0.3;
+  Timer? timer;
+  int currentSeconds = 0;
+  late int totalSeconds;
+
+
+  @override
+  void initState() {
+    super.initState();
+    totalSeconds = widget.item.duration;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +70,24 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 size: 30,
               ),
               onPressed: () {
+                if (isPlaying) {
+                  // ⏸ PAUSE
+                  timer?.cancel();
+                } else {
+                  // ▶ PLAY
+                  timer?.cancel(); // prevent duplicate timers
+
+                  timer = Timer.periodic(const Duration(seconds: 1), (_) {
+                    if (currentSeconds < totalSeconds) {
+                      setState(() {
+                        currentSeconds++;
+                      });
+                    } else {
+                      timer?.cancel();
+                    }
+                  });
+                }
+
                 setState(() {
                   isPlaying = !isPlaying;
                 });
@@ -68,10 +98,11 @@ class _PlayerScreenState extends State<PlayerScreen> {
           const SizedBox(height: 30),
 
           Slider(
-            value: progress,
+            value: currentSeconds.toDouble(),
+            max: totalSeconds.toDouble(),
             onChanged: (value) {
               setState(() {
-                progress = value;
+                currentSeconds=value.toInt();
               });
             },
           ),
@@ -80,9 +111,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("0:30"),
-                Text("3:00"),
+              children: [
+                Text(formatTime(currentSeconds)),
+                Text(formatTime(totalSeconds)),
               ],
             ),
           ),
@@ -99,4 +130,9 @@ class _PlayerScreenState extends State<PlayerScreen> {
       ),
     );
   }
+}
+String formatTime(int seconds) {
+  final minutes = seconds ~/ 60;
+  final secs = seconds % 60;
+  return "$minutes:${secs.toString().padLeft(2, '0')}";
 }

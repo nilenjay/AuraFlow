@@ -33,7 +33,8 @@ dependencies:
 
   flutter_bloc:
   equatable:
-  go_router: 
+  go_router:
+  just_audio: ^0.9.36
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
