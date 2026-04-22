@@ -2,7 +2,7 @@
 
 AuraFlow is a premium mini-experience designed to help users find calm through immersive ambiences and mindful journaling. Built with a focus on clean architecture, stable state management, and thoughtful UX.
 
-## 📱 Features
+## Features
 
 - **Ambience Library**: Explore a curated list of 6 local ambiences with search and tag filtering.
 - **Immersive Player**: A dedicated session player with high-quality looping audio and a subtle "breathing" visual animation.
@@ -12,7 +12,7 @@ AuraFlow is a premium mini-experience designed to help users find calm through i
 - **Dark Mode**: A fully integrated dark mode powered by a dedicated BLoC (ThemeCubit).
 - **Floating Navigation**: A custom, animated bottom navigation bar with integrated active state transitions.
 
-## 🏗️ Architecture & Tech Stack
+##  Architecture & Tech Stack
 
 The project follows **Clean Architecture** principles, separating the codebase into logical layers:
 
@@ -27,7 +27,7 @@ The project follows **Clean Architecture** principles, separating the codebase i
 - **Persistence**: `hive` (Fast NoSQL database for session and journal storage)
 - **Icons**: Custom PNG assets for a unique, premium nav feel.
 
-## 🧠 Design Decisions & Tradeoffs
+## Design Decisions & Tradeoffs
 
 ### 1. Pure BLoC Pattern
 To ensure scalability and testability, I transitioned all state management to BLoC. This includes the `ThemeCubit` for global theme switching, ensuring a single source of truth for the app's appearance.
@@ -40,25 +40,3 @@ Unlike a standard music app, the "Session Timer" is decoupled from the audio fil
 
 ### 4. Custom Navigation
 Instead of using the standard Material BottomNavigationBar, I built a custom floating pill navigation bar. This was a tradeoff in complexity but allowed for the specific "active circle" animation requested in the design specification.
-
-## 🚀 Getting Started
-
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   flutter pub get
-   ```
-
-3. **Run the app**:
-   ```bash
-   flutter run
-   ```
-
-## 📦 Deliverables
-- **GitHub Repository**: [Link to Repository]
-- **Android APK**: Located in `/build/app/outputs/flutter-apk/app-release.apk`
-- **Screen Recording**: Included in the repository assets.
