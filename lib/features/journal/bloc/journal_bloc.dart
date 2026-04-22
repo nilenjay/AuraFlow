@@ -18,7 +18,7 @@ class JournalBloc extends Bloc<JournalEvent, JournalState> {
       final entries = repo.getEntries();
       emit(JournalLoaded(entries));
     } catch (e) {
-      emit(JournalError("Failed to load entries"));
+      emit(const JournalError("Failed to load entries"));
     }
   }
 
@@ -29,7 +29,7 @@ class JournalBloc extends Bloc<JournalEvent, JournalState> {
       final entries = repo.getEntries();
       emit(JournalLoaded(entries));
     } catch (e) {
-      emit(JournalError("Failed to save entry"));
+      emit(const JournalError("Failed to save entry"));
     }
   }
 }

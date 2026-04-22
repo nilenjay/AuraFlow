@@ -4,6 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import '../data/models/ambience_model.dart';
 import '../features/ambience/screens/ambience_details_screen.dart';
+import '../features/journal/screens/journal_screen.dart';
+import '../features/journal/screens/journal_history_screen.dart';
+import '../features/journal/screens/journal_detail_screen.dart';
+import '../features/journal/models/journal_entry.dart';
 import '../features/player/screens/player_screen.dart';
 
 class AppRouter {
@@ -40,6 +44,28 @@ class AppRouter {
           return AppShell(
             child: PlayerScreen(item: item),
           );
+        },
+      ),
+      GoRoute(
+        path: '/journal',
+        name: 'journal',
+        builder: (context, state) {
+          final title = state.extra as String;
+          return AppShell(child: JournalScreen(title: title));
+        },
+      ),
+      GoRoute(
+        path: '/history',
+        name: 'history',
+        builder: (context, state) =>
+            AppShell(child: const JournalHistoryScreen()),
+      ),
+      GoRoute(
+        path: '/journal-detail',
+        name: 'journal-detail',
+        builder: (context, state) {
+          final entry = state.extra as JournalEntry;
+          return AppShell(child: JournalDetailScreen(entry: entry));
         },
       ),
     ],

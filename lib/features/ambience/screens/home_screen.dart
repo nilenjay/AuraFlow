@@ -1,6 +1,8 @@
 import 'package:auraflow/features/ambience/bloc/ambience_bloc.dart';
+import 'package:auraflow/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../bloc/ambience_event.dart';
 import '../bloc/ambience_state.dart';
@@ -100,7 +102,28 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const CircleAvatar(radius: 18),
+                        Row(
+                          children: [
+                            ValueListenableBuilder<ThemeMode>(
+                              valueListenable: themeNotifier,
+                              builder: (context, mode, _) => IconButton(
+                                icon: Icon(mode == ThemeMode.dark
+                                    ? Icons.light_mode
+                                    : Icons.dark_mode),
+                                onPressed: () {
+                                  themeNotifier.value =
+                                      mode == ThemeMode.dark
+                                          ? ThemeMode.light
+                                          : ThemeMode.dark;
+                                },
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.history),
+                              onPressed: () => context.pushNamed('history'),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

@@ -34,6 +34,17 @@ class Ambience extends Equatable{
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'title': title,
+    'tag': tag,
+    'duration': duration,
+    'image': image,
+    'audio': audio,
+    'description': description,
+    'sensoryTags': sensoryTags,
+  };
+
   @override
   List<Object?> get props => [id, title, tag, duration, image, audio, description, sensoryTags];
 }

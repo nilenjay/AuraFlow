@@ -6,7 +6,57 @@
     "duration": 180,
     "image": "assets/images/forest.jpg",
     "audio": "assets/audio/forest.mp3",
-    "description": "Calm forest ambience",
-    "sensoryTags": ["Breeze", "Mist"]
+    "description": "Immerse yourself in the gentle rustle of leaves and birdsong to sharpen your concentration.",
+    "sensoryTags": ["Breeze", "Mist", "Binaural"]
+  },
+  {
+    "id": "2",
+    "title": "Ocean Calm",
+    "tag": "Calm",
+    "duration": 240,
+    "image": "assets/images/forest.jpg",
+    "audio": "assets/audio/forest.mp3",
+    "description": "Let the rhythmic pull of ocean waves wash away tension and bring you into stillness.",
+    "sensoryTags": ["Soft Rain", "Warm Light", "Breeze"]
+  },
+  {
+    "id": "3",
+    "title": "Deep Sleep",
+    "tag": "Sleep",
+    "duration": 300,
+    "image": "assets/images/forest.jpg",
+    "audio": "assets/audio/forest.mp3",
+    "description": "Drift into restful sleep with low-frequency tones and the softest of night sounds.",
+    "sensoryTags": ["Binaural", "Mist", "Warm Light"]
+  },
+  {
+    "id": "4",
+    "title": "Morning Reset",
+    "tag": "Reset",
+    "duration": 120,
+    "image": "assets/images/forest.jpg",
+    "audio": "assets/audio/forest.mp3",
+    "description": "A gentle sunrise soundscape to clear your mind and set a calm intention for the day.",
+    "sensoryTags": ["Breeze", "Warm Light"]
+  },
+  {
+    "id": "5",
+    "title": "Rain Focus",
+    "tag": "Focus",
+    "duration": 200,
+    "image": "assets/images/forest.jpg",
+    "audio": "assets/audio/forest.mp3",
+    "description": "Steady rain on a window pane creates the perfect white-noise backdrop for deep work.",
+    "sensoryTags": ["Soft Rain", "Binaural", "Mist"]
+  },
+  {
+    "id": "6",
+    "title": "Still Waters",
+    "tag": "Calm",
+    "duration": 150,
+    "image": "assets/images/forest.jpg",
+    "audio": "assets/audio/forest.mp3",
+    "description": "A serene lake at dusk — minimal sound, maximum peace.",
+    "sensoryTags": ["Breeze", "Soft Rain", "Warm Light"]
   }
 ]
