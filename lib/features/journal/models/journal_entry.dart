@@ -15,6 +15,26 @@ class JournalEntry extends Equatable {
     required this.date,
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'mood': mood,
+      'text': text,
+      'date': date.toIso8601String(),
+    };
+  }
+
+  factory JournalEntry.fromMap(Map<String, dynamic> map) {
+    return JournalEntry(
+      id: map['id'] as String,
+      title: map['title'] as String,
+      mood: map['mood'] as String,
+      text: map['text'] as String,
+      date: DateTime.parse(map['date'] as String),
+    );
+  }
+
   @override
   List<Object?> get props => [id, title, mood, text, date];
 }
