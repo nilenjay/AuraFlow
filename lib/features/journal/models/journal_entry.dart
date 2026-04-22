@@ -1,11 +1,13 @@
-class JournalEntry {
+import 'package:equatable/equatable.dart';
+
+class JournalEntry extends Equatable {
   final String id;
   final String title;
   final String mood;
   final String text;
   final DateTime date;
 
-  JournalEntry({
+  const JournalEntry({
     required this.id,
     required this.title,
     required this.mood,
@@ -13,23 +15,6 @@ class JournalEntry {
     required this.date,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'mood': mood,
-      'text': text,
-      'date': date.toIso8601String(),
-    };
-  }
-
-  factory JournalEntry.fromMap(Map<String, dynamic> map) {
-    return JournalEntry(
-      id: map['id'],
-      title: map['title'],
-      mood: map['mood'],
-      text: map['text'],
-      date: DateTime.parse(map['date']),
-    );
-  }
+  @override
+  List<Object?> get props => [id, title, mood, text, date];
 }

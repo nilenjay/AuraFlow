@@ -1,4 +1,19 @@
-part of 'journal_bloc.dart';
+import 'package:auraflow/features/journal/models/journal_entry.dart';
+import 'package:equatable/equatable.dart';
 
-@immutable
-sealed class JournalEvent {}
+abstract class JournalEvent extends Equatable{
+  const JournalEvent();
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+
+class SaveJournal extends JournalEvent{
+  final JournalEntry entry;
+  const SaveJournal(this.entry);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [entry];
+}
+
+class LoadJournal extends JournalEvent{}

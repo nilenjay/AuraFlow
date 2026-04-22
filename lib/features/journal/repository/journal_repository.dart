@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import '../models/journal_entry.dart';
 
 class JournalRepository {
-  final Box box = Hive.box('journalBox');
+  final Box<Map> box = Hive.box<Map>('journalBox');
 
   Future<void> addEntry(JournalEntry entry) async {
     await box.put(entry.id, entry.toMap());
@@ -14,5 +14,9 @@ class JournalRepository {
         .toList()
         .reversed
         .toList();
+  }
+
+  Future<void> clearAll() async {
+    await box.clear();
   }
 }
