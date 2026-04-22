@@ -63,7 +63,34 @@ class AppShell extends StatelessWidget {
                           }
                         },
                         onClose: () async {
-                          await audioService.stop();
+                          final confirmed = await showDialog<bool>(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text('End Session?'),
+                              content: const Text(
+                                'This will stop your session and take you to your reflection.',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, true),
+                                  child: const Text('End'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (confirmed == true) {
+                            final title = current.title;
+                            await audioService.stop();
+                            if (context.mounted) {
+                              context.pushNamed('journal', extra: title);
+                            }
+                          }
                         },
                       ),
                     );
