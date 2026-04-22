@@ -4,11 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'data/repositories/ambience_repository.dart';
 import 'features/ambience/bloc/ambience_bloc.dart';
 import 'features/ambience/screens/home_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+
+  await Hive.openBox('journalBox');
+  await Hive.openBox('sessionBox');
+
   runApp(const AuraFlowApp());
 }
-
 class AuraFlowApp extends StatelessWidget {
   const AuraFlowApp({super.key});
 
