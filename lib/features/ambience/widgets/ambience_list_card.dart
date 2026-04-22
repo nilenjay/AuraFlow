@@ -11,64 +11,74 @@ class AmbienceListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(
-          'details',
-          extra: item,
-        );
+        context.pushNamed('details', extra: item);
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: Stack(
             children: [
-
-              // IMAGE
-              ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-                child: Image.asset(
-                  item.image,
-                  height: 140,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+              Image.asset(
+                item.image,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+              Container(
+                height: 200,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.transparent,
+                      Colors.black.withOpacity(0.7),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
               ),
-
-              // TEXT
-              Padding(
-                padding: const EdgeInsets.all(12),
+              Positioned(
+                bottom: 16,
+                left: 16,
+                right: 70,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       item.tag.toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
+                        color: Colors.white70,
                         fontSize: 10,
-                        color: Colors.grey.shade600,
+                        letterSpacing: 1.2,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       item.title,
                       style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
                     Text(
                       "${item.duration ~/ 60} min",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade600,
-                      ),
+                      style: const TextStyle(color: Colors.white70),
                     ),
                   ],
+                ),
+              ),
+              Positioned(
+                bottom: 16,
+                right: 16,
+                child: CircleAvatar(
+                  radius: 22,
+                  backgroundColor: Colors.blue,
+                  child: const Icon(
+                    Icons.play_arrow,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],

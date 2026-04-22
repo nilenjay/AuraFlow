@@ -1,10 +1,10 @@
+import 'package:auraflow/core/bloc/theme_cubit.dart';
 import 'package:auraflow/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'data/models/ambience_model.dart';
 import 'data/repositories/ambience_repository.dart';
 import 'features/ambience/bloc/ambience_bloc.dart';
-import 'features/ambience/screens/home_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'features/journal/bloc/journal_bloc.dart';
@@ -28,7 +28,6 @@ void main() async {
 
   runApp(const AuraFlowApp());
 }
-final themeNotifier = ValueNotifier<ThemeMode>(ThemeMode.light);
 
 class AuraFlowApp extends StatelessWidget {
   const AuraFlowApp({super.key});
@@ -36,17 +35,13 @@ class AuraFlowApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-              create: (_) => AmbienceBloc(AmbienceRepository()),
-          ),
-          BlocProvider(
-            create: (_) => JournalBloc(JournalRepository()),
-          ),
-        ],
-      child: ValueListenableBuilder<ThemeMode>(
-        valueListenable: themeNotifier,
-        builder: (context, mode, _) => MaterialApp.router(
+      providers: [
+        BlocProvider(create: (_) => AmbienceBloc(AmbienceRepository())),
+        BlocProvider(create: (_) => JournalBloc(JournalRepository())),
+        BlocProvider(create: (_) => ThemeCubit()),
+      ],
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, mode) => MaterialApp.router(
           debugShowCheckedModeBanner: false,
           themeMode: mode,
           theme: ThemeData(

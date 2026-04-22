@@ -1,12 +1,11 @@
+import 'package:auraflow/core/bloc/theme_cubit.dart';
 import 'package:auraflow/features/ambience/bloc/ambience_bloc.dart';
-import 'package:auraflow/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../bloc/ambience_event.dart';
 import '../bloc/ambience_state.dart';
-import '../widgets/featured_card.dart';
 import '../widgets/ambience_list_card.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -94,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(Icons.menu),
+                        const SizedBox(width: 40),
                         const Text(
                           "AuraFlow",
                           style: TextStyle(
@@ -104,18 +103,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Row(
                           children: [
-                            ValueListenableBuilder<ThemeMode>(
-                              valueListenable: themeNotifier,
-                              builder: (context, mode, _) => IconButton(
+                            BlocBuilder<ThemeCubit, ThemeMode>(
+                              builder: (context, mode) => IconButton(
                                 icon: Icon(mode == ThemeMode.dark
                                     ? Icons.light_mode
                                     : Icons.dark_mode),
-                                onPressed: () {
-                                  themeNotifier.value =
-                                      mode == ThemeMode.dark
-                                          ? ThemeMode.light
-                                          : ThemeMode.dark;
-                                },
+                                onPressed: () =>
+                                    context.read<ThemeCubit>().toggle(),
                               ),
                             ),
                             IconButton(
@@ -186,14 +180,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 12),
 
-                  FeaturedCard(item: list.first),
-
-                  const SizedBox(height: 20),
-
-                  ...list.skip(1).map(
-                        (item) => AmbienceListCard(item: item),
+                  ...list.map(
+                    (item) => AmbienceListCard(item: item),
                   ),
                 ],
               ),

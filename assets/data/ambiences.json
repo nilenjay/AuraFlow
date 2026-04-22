@@ -14,8 +14,8 @@
     "title": "Ocean Calm",
     "tag": "Calm",
     "duration": 240,
-    "image": "assets/images/forest.jpg",
-    "audio": "assets/audio/forest.mp3",
+    "image": "assets/images/Ocean.jpg",
+    "audio": "assets/audio/audio2.mpeg",
     "description": "Let the rhythmic pull of ocean waves wash away tension and bring you into stillness.",
     "sensoryTags": ["Soft Rain", "Warm Light", "Breeze"]
   },
@@ -24,8 +24,8 @@
     "title": "Deep Sleep",
     "tag": "Sleep",
     "duration": 300,
-    "image": "assets/images/forest.jpg",
-    "audio": "assets/audio/forest.mp3",
+    "image": "assets/images/image2.jpg",
+    "audio": "assets/audio/audio3.mpeg",
     "description": "Drift into restful sleep with low-frequency tones and the softest of night sounds.",
     "sensoryTags": ["Binaural", "Mist", "Warm Light"]
   },
@@ -34,8 +34,8 @@
     "title": "Morning Reset",
     "tag": "Reset",
     "duration": 120,
-    "image": "assets/images/forest.jpg",
-    "audio": "assets/audio/forest.mp3",
+    "image": "assets/images/image3.jpg",
+    "audio": "assets/audio/audio4.mpeg",
     "description": "A gentle sunrise soundscape to clear your mind and set a calm intention for the day.",
     "sensoryTags": ["Breeze", "Warm Light"]
   },
@@ -44,8 +44,8 @@
     "title": "Rain Focus",
     "tag": "Focus",
     "duration": 200,
-    "image": "assets/images/forest.jpg",
-    "audio": "assets/audio/forest.mp3",
+    "image": "assets/images/image4.jpg",
+    "audio": "assets/audio/audio5.mpeg",
     "description": "Steady rain on a window pane creates the perfect white-noise backdrop for deep work.",
     "sensoryTags": ["Soft Rain", "Binaural", "Mist"]
   },
@@ -54,8 +54,8 @@
     "title": "Still Waters",
     "tag": "Calm",
     "duration": 150,
-    "image": "assets/images/forest.jpg",
-    "audio": "assets/audio/forest.mp3",
+    "image": "assets/images/image5.jpg",
+    "audio": "assets/audio/audio6.mpeg",
     "description": "A serene lake at dusk — minimal sound, maximum peace.",
     "sensoryTags": ["Breeze", "Soft Rain", "Warm Light"]
   }
