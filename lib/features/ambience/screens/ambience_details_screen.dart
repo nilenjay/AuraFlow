@@ -105,7 +105,10 @@ class AmbienceDetailScreen extends StatelessWidget{
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: (){
-
+                            context.pushNamed(
+                              'player',
+                              extra: item,
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),

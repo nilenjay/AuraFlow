@@ -14,13 +14,21 @@ class AppRouter {
         builder: (context,state)=> const HomeScreen(),
       ),
       GoRoute(
-        path: '/detail',
-        name: 'detail',
+        path: '/details',
+        name: 'details',
         builder: (context,state){
           final item=state.extra as Ambience;
           return AmbienceDetailScreen(item: item);
         }
-      )
+      ),
+      GoRoute(
+        path: '/player',
+        name: 'player',
+        builder: (context, state) {
+          final item = state.extra as Ambience;
+          return PlayerScreen(item: item);
+        },
+      ),
     ]
   );
 }
